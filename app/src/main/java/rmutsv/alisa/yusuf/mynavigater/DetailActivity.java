@@ -9,6 +9,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -85,6 +86,20 @@ public class DetailActivity extends FragmentActivity implements OnMapReadyCallba
         LatLng latLng = new LatLng(Double.parseDouble(latStrings[0]),
                 Double.parseDouble(lngStrings[0]));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+
+        //Create Marker
+        MarkerOptions startMarkerOptions = new MarkerOptions();
+        startMarkerOptions.position(latLng)
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
+        mMap.addMarker(startMarkerOptions);
+
+        LatLng endLatLng1 = new LatLng(Double.parseDouble(latStrings[latStrings.length - 1]),
+                Double.parseDouble(lngStrings[lngStrings.length - 1]));
+
+        MarkerOptions endMarkerOptions = new MarkerOptions();
+        endMarkerOptions.position(endLatLng1)
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
+        mMap.addMarker(endMarkerOptions);
 
 
     }   // onMapReady
