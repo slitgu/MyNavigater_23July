@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -40,7 +42,20 @@ public class DetailActivity extends FragmentActivity implements OnMapReadyCallba
         // Create Maps Fragment
         createMapsFragment();
 
+        // Back Controller
+        backController();
+
     }   // Main Method
+
+    private void backController() {
+        ImageView imageView = (ImageView) findViewById(R.id.imvBack);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
 
     private void createArray() {
 
