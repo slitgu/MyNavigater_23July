@@ -1,5 +1,6 @@
 package rmutsv.alisa.yusuf.mynavigater;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class DetailActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -100,6 +102,19 @@ public class DetailActivity extends FragmentActivity implements OnMapReadyCallba
         endMarkerOptions.position(endLatLng1)
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
         mMap.addMarker(endMarkerOptions);
+
+
+        // Create Polyline
+
+        PolylineOptions polylineOptions = new PolylineOptions();
+        for (int i=0; i<latStrings.length-1; i+=1) {
+
+            polylineOptions.add(new LatLng(Double.parseDouble(latStrings[i]),
+                    Double.parseDouble(lngStrings[i])));
+
+        } // for
+        polylineOptions.width(5).color(Color.RED);
+        mMap.addPolyline(polylineOptions);
 
 
     }   // onMapReady
