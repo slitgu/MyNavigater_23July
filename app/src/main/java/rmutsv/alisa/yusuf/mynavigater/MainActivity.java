@@ -3,6 +3,8 @@ package rmutsv.alisa.yusuf.mynavigater;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.LocationManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     } // main method
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        boolean bolGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if (!bolGPS) {
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+    }
 
     private void createListView() {
         ListView listView = (ListView) findViewById(R.id.livMap);
