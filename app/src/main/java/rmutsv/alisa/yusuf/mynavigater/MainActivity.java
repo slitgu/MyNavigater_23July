@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("Distance", distanceStrings[i]);
                     intent.putExtra("Lat", latStrings[i]);
                     intent.putExtra("Lng", lngStrings[i]);
-                    startActivity(intent);
+                    startActivityForResult(intent, 200);
 
 
                 }

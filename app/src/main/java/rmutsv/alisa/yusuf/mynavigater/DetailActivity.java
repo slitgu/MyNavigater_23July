@@ -1,5 +1,7 @@
 package rmutsv.alisa.yusuf.mynavigater;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ public class DetailActivity extends FragmentActivity implements OnMapReadyCallba
     private String idString, nameString, dateString, distanceString, latString, lngString;
     private TextView nameTextView, dateTextView, distanceTextView;
     private String[] latStrings, lngStrings;
+    private String tag = "24JulyV1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,43 @@ public class DetailActivity extends FragmentActivity implements OnMapReadyCallba
         // Back Controller
         backController();
 
+        //Delete Controller
+        deleteController();
+
+
     }   // Main Method
+
+    private void deleteController() {
+        ImageView imageView = (ImageView) findViewById(R.id.imvDelete);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.d(tag, "Delete ID ==>" + idString);
+                deleteSQLite(idString, true);
+
+
+            }
+        });
+    }
+
+    private void deleteSQLite(String idString, boolean bolStatus) {
+
+        SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.databaseName,
+                MODE_PRIVATE, null);
+        sqLiteDatabase.delete("navigateTABLE", "id" + "=" + idString, null);
+
+        if (bolStatus) {
+            //Delete Only
+            Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+            setResult(200, intent);
+            finish();
+        } else {
+            //Delete and Add New Map
+        }
+
+
+    }
 
     private void backController() {
         ImageView imageView = (ImageView) findViewById(R.id.imvBack);
